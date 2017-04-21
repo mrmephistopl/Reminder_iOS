@@ -15,7 +15,6 @@
 		61E81AC21E9FFEA100FE6FF1 /* ReminderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81AC11E9FFEA100FE6FF1 /* ReminderUITests.swift */; };
 		61E81AD01EA0CB6B00FE6FF1 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81ACF1EA0CB6B00FE6FF1 /* TableViewController.swift */; };
 		61E81AD21EA0CB9600FE6FF1 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81AD11EA0CB9600FE6FF1 /* AddViewController.swift */; };
-		61E81AD41EA0CBA400FE6FF1 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81AD31EA0CBA400FE6FF1 /* DetailViewController.swift */; };
 		61E81AD61EA0DBF700FE6FF1 /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81AD51EA0DBF700FE6FF1 /* ToDoItem.swift */; };
 		61E81AD91EA0E4A500FE6FF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E81AD71EA0E4A500FE6FF1 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -52,7 +51,6 @@
 		61E81AC31E9FFEA100FE6FF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61E81ACF1EA0CB6B00FE6FF1 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		61E81AD11EA0CB9600FE6FF1 /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
-		61E81AD31EA0CBA400FE6FF1 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		61E81AD51EA0DBF700FE6FF1 /* ToDoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
 		61E81AD81EA0E4A500FE6FF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				61E81A9E1E9FFEA100FE6FF1 /* AppDelegate.swift */,
-				61E81AD31EA0CBA400FE6FF1 /* DetailViewController.swift */,
 				61E81AD11EA0CB9600FE6FF1 /* AddViewController.swift */,
 				61E81ACF1EA0CB6B00FE6FF1 /* TableViewController.swift */,
 				61E81AD51EA0DBF700FE6FF1 /* ToDoItem.swift */,
@@ -277,7 +274,6 @@
 				61E81A9F1E9FFEA100FE6FF1 /* AppDelegate.swift in Sources */,
 				61E81AD01EA0CB6B00FE6FF1 /* TableViewController.swift in Sources */,
 				61E81AD61EA0DBF700FE6FF1 /* ToDoItem.swift in Sources */,
-				61E81AD41EA0CBA400FE6FF1 /* DetailViewController.swift in Sources */,
 				61E81AD21EA0CB9600FE6FF1 /* AddViewController.swift in Sources */,
 				61E81AA71E9FFEA100FE6FF1 /* Reminder.xcdatamodeld in Sources */,
 			);

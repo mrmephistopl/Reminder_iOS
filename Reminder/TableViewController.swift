@@ -10,19 +10,22 @@ import UIKit
 
 class TableViewController: UITableViewController, AddViewControllerDelegate {
   
+    
     var toDoItems: [ToDoItem]
     
-    required init?(coder aDecoder: NSCoder) {
+    
+   required init?(coder aDecoder: NSCoder) {
         toDoItems = [ToDoItem]()
         
-        let row0item = ToDoItem()
-        row0item.title = "Walk the dog"
-        row0item.description = "Tommorow afternoon"
-        row0item.checked = false
-        toDoItems.append(row0item)
+        let firstItem = ToDoItem()
+        firstItem.title = "Zakupy"
+        firstItem.desc = "Chleb, woda, masło"
+        firstItem.checked = false
+        toDoItems.append(firstItem)
         
         super.init(coder: aDecoder)
-
+        loadToDoItems()
+        registerDefaults()
     }
 
     override func viewDidLoad() {
@@ -41,6 +44,7 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return toDoItems.count
+        
     }
     
 
@@ -61,13 +65,16 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
             configureCheckmark(for: cell, with: item)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+        saveToDoItems()
     }
 
     func configureCheckmark(for cell: UITableViewCell, with item: ToDoItem) {
+        let label = cell.viewWithTag(1002) as! UILabel
+        
         if item.checked{
-            cell.accessoryType = .checkmark
+            label.text = "☑︎"
         } else {
-            cell.accessoryType = .none
+            label.text = ""
         }
     }
     
@@ -75,7 +82,7 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         let label = cell.viewWithTag(1000) as! UILabel
         let labelDesc = cell.viewWithTag(1001) as! UILabel
         label.text = item.title
-        labelDesc.text = item.description
+        labelDesc.text = item.desc
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -84,6 +91,7 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
+        saveToDoItems()
     }
     
     func addViewControllerDidCancel(_ controller: AddViewController) {
@@ -99,6 +107,18 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         tableView.insertRows(at: indexPaths, with: .automatic)
         
         dismiss(animated: true, completion: nil)
+        saveToDoItems()
+    }
+    
+    func addViewController(_ controller: AddViewController, didFinishEditing item: ToDoItem) {
+        if let index = toDoItems.index(of: item) {
+            let indexPath = IndexPath(row: index, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) {
+                configureText(for: cell, with: item)
+            }
+        }
+        dismiss(animated: true, completion: nil)
+        saveToDoItems()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -107,52 +127,57 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
                 as! UINavigationController
             let controller = navigationController.topViewController as! AddViewController
             controller.delegate = self
+        } else if segue.identifier == "Edit" {
+            let navigationController = segue.destination as! UINavigationController
+            let controller = navigationController.topViewController as! AddViewController
+            controller.delegate = self
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell){
+                controller.itemToEdit = toDoItems[indexPath.row]
+            }
         }
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func registerDefaults() {
+    let dictionary: [String: Any] = [ "ToDoItemID": 0 ]
+    UserDefaults.standard.register(defaults: dictionary)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    class func nextToDoItemID() -> Int {
+        let userDefaults = UserDefaults.standard
+        let toDoItemID = userDefaults.integer(forKey: "ToDoItemID")
+        userDefaults.set(toDoItemID+1, forKey: "ToDoItemID")
+        userDefaults.synchronize()
+        return toDoItemID
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    
+    //Przechowywanie w pamięci
+ 
+    func documentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    func dataFilePath() -> URL {
+        return documentsDirectory().appendingPathComponent("Reminder.plist")
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func saveToDoItems() {
+        let data = NSMutableData()
+        let archiver = NSKeyedArchiver(forWritingWith: data)
+        archiver.encode(toDoItems, forKey: "ToDoItems")
+        archiver.finishEncoding()
+        data.write(to: dataFilePath(), atomically: true)
     }
-    */
-
+    
+    func loadToDoItems() {
+        let path = dataFilePath()
+        if let data = try? Data(contentsOf: path) {
+        let unarchiver = NSKeyedUnarchiver(forReadingWith: data)
+        toDoItems = unarchiver.decodeObject(forKey: "ToDoItems") as! [ToDoItem]
+        unarchiver.finishDecoding()
+        }
+    }
+    
+    
 }

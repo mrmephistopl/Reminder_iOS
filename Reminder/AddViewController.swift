@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import UserNotifications
 
 protocol AddViewControllerDelegate: class {
     func addViewControllerDidCancel(_ controller: AddViewController)
     func addViewController(_ controller: AddViewController, didFinishAdding item: ToDoItem)
+    func addViewController(_ controller: AddViewController, didFinishEditing item: ToDoItem)
 }
 
 class AddViewController: UIViewController, UITextFieldDelegate {
@@ -18,12 +20,31 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
+    @IBOutlet weak var shouldRemindSwitch: UISwitch!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
+    
+    var itemToEdit: ToDoItem?
     weak var delegate: AddViewControllerDelegate?
+    var date = Date()
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        doneBarButton.isEnabled = false
+        
+        if let item = itemToEdit {
+            title = "Edit"
+            titleTextField.text = item.title
+            descriptionTextField.text = item.desc
+            doneBarButton.isEnabled = true
+            shouldRemindSwitch.isOn = item.shouldRemind
+            date = item.date
+            datePicker.setDate(date, animated: false)
+            dateLabel.textColor = UIColor.red
+        }
+        updateDateLabel()
+       // doneBarButton.isEnabled = false
         titleTextField.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         // Do any additional setup after loading the view.
     }
@@ -34,14 +55,32 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func done() {
+        if let toDoItem = itemToEdit {
+            toDoItem.title = titleTextField.text!
+            if let description = descriptionTextField.text {
+                toDoItem.desc = description
+            }
+            
+            toDoItem.shouldRemind = shouldRemindSwitch.isOn
+            toDoItem.date = date
+            toDoItem.scheduleNotification()
+            
+            delegate?.addViewController(self, didFinishEditing: toDoItem)
+        } else {
+        
         let toDoItem = ToDoItem()
         toDoItem.title = titleTextField.text!
         if let description = descriptionTextField.text {
-           toDoItem.description = description
+           toDoItem.desc = description
         }
+            
         toDoItem.checked = false
-        
+        toDoItem.shouldRemind = shouldRemindSwitch.isOn
+        toDoItem.date = date
+        toDoItem.scheduleNotification()
+            
         delegate?.addViewController(self, didFinishAdding: toDoItem)
+        }
     }
     
     @IBAction func cancel() {
@@ -57,10 +96,10 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    /* func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         titleTextField.resignFirstResponder()
         return true
-    }
+    }*/
     
     func editingChanged(_ textField: UITextField) {
         if textField.text?.characters.count == 1 {
@@ -77,6 +116,32 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         }
         doneBarButton.isEnabled = true
     }
+    
+    func updateDateLabel() {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        dateLabel.text = formatter.string(from: date)
+    }
+    
+    @IBAction func dataChange(_ dataPicker: UIDatePicker) {
+        date = dataPicker.date
+        updateDateLabel()
+    }
+    
+    @IBAction func shuldRemind(_ switchControl: UISwitch) {
+        titleTextField.resignFirstResponder()
+        
+        if switchControl.isOn {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound]) {
+                granted, error in
+            }
+            
+        }
+    }
+    
+ 
     
     /*
     
