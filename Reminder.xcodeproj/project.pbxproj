@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61ADD21D1EAAAC8B0061D460 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ADD21C1EAAAC8B0061D460 /* SWRevealViewController.m */; };
+		61ADD2211EAABB8A0061D460 /* ContactSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ADD2201EAABB8A0061D460 /* ContactSideMenu.swift */; };
+		61ADD2231EAABC840061D460 /* AuthorSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ADD2221EAABC840061D460 /* AuthorSideMenu.swift */; };
 		61E81A9F1E9FFEA100FE6FF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81A9E1E9FFEA100FE6FF1 /* AppDelegate.swift */; };
 		61E81AA71E9FFEA100FE6FF1 /* Reminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 61E81AA51E9FFEA100FE6FF1 /* Reminder.xcdatamodeld */; };
 		61E81AA91E9FFEA100FE6FF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61E81AA81E9FFEA100FE6FF1 /* Assets.xcassets */; };
@@ -37,6 +40,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61ADD21B1EAAAC8B0061D460 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		61ADD21C1EAAAC8B0061D460 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		61ADD21F1EAAAD8A0061D460 /* Reminder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Reminder-Bridging-Header.h"; sourceTree = "<group>"; };
+		61ADD2201EAABB8A0061D460 /* ContactSideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactSideMenu.swift; sourceTree = "<group>"; };
+		61ADD2221EAABC840061D460 /* AuthorSideMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorSideMenu.swift; sourceTree = "<group>"; };
 		61E81A9B1E9FFEA100FE6FF1 /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E81A9E1E9FFEA100FE6FF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61E81AA61E9FFEA100FE6FF1 /* Reminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reminder.xcdatamodel; sourceTree = "<group>"; };
@@ -108,7 +116,12 @@
 				61E81ACF1EA0CB6B00FE6FF1 /* TableViewController.swift */,
 				61E81AD51EA0DBF700FE6FF1 /* ToDoItem.swift */,
 				61E81AA81E9FFEA100FE6FF1 /* Assets.xcassets */,
+				61ADD21B1EAAAC8B0061D460 /* SWRevealViewController.h */,
+				61ADD21C1EAAAC8B0061D460 /* SWRevealViewController.m */,
+				61ADD21F1EAAAD8A0061D460 /* Reminder-Bridging-Header.h */,
 				61E81AD71EA0E4A500FE6FF1 /* Main.storyboard */,
+				61ADD2221EAABC840061D460 /* AuthorSideMenu.swift */,
+				61ADD2201EAABB8A0061D460 /* ContactSideMenu.swift */,
 				61E81AAA1E9FFEA100FE6FF1 /* LaunchScreen.storyboard */,
 				61E81AAD1E9FFEA100FE6FF1 /* Info.plist */,
 				61E81AA51E9FFEA100FE6FF1 /* Reminder.xcdatamodeld */,
@@ -203,6 +216,7 @@
 					61E81A9A1E9FFEA100FE6FF1 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = BETW692PX8;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					61E81AB11E9FFEA100FE6FF1 = {
@@ -271,11 +285,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61ADD2211EAABB8A0061D460 /* ContactSideMenu.swift in Sources */,
 				61E81A9F1E9FFEA100FE6FF1 /* AppDelegate.swift in Sources */,
 				61E81AD01EA0CB6B00FE6FF1 /* TableViewController.swift in Sources */,
 				61E81AD61EA0DBF700FE6FF1 /* ToDoItem.swift in Sources */,
+				61ADD2231EAABC840061D460 /* AuthorSideMenu.swift in Sources */,
 				61E81AD21EA0CB9600FE6FF1 /* AddViewController.swift in Sources */,
 				61E81AA71E9FFEA100FE6FF1 /* Reminder.xcdatamodeld in Sources */,
+				61ADD21D1EAAAC8B0061D460 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,11 +442,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = BETW692PX8;
 				INFOPLIST_FILE = Reminder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mateuszpotasnik.Reminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Reminder/Reminder-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -438,11 +458,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = BETW692PX8;
 				INFOPLIST_FILE = Reminder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mateuszpotasnik.Reminder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Reminder/Reminder-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

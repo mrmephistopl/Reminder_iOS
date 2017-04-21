@@ -11,6 +11,7 @@ import UIKit
 class TableViewController: UITableViewController, AddViewControllerDelegate {
   
     
+    @IBOutlet weak var menuButton: UIBarButtonItem!
     var toDoItems: [ToDoItem]
     
     
@@ -30,6 +31,8 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        leftSideMenu()
+        customizeNavigationBar()
 
     }
 
@@ -177,6 +180,24 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         toDoItems = unarchiver.decodeObject(forKey: "ToDoItems") as! [ToDoItem]
         unarchiver.finishDecoding()
         }
+    }
+    
+    //Slide out menu
+    
+    func leftSideMenu() {
+        if revealViewController() != nil {
+            menuButton.target = revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            revealViewController().rearViewRevealWidth = 175
+            
+            view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+    }
+    
+    func customizeNavigationBar() {
+        navigationController?.navigationBar.tintColor = UIColor(colorLiteralRed: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 255/255, green: 87/255, blue: 35/255, alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     }
     
     
