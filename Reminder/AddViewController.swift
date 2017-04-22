@@ -32,6 +32,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        customizeNavigationBar()
+        backgroundImage()
         
         if let item = itemToEdit {
             title = "Edit"
@@ -139,6 +141,20 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             }
             
         }
+    }
+    
+    func customizeNavigationBar() {
+        navigationController?.navigationBar.tintColor = UIColor(colorLiteralRed: 255/255, green: 255/255, blue: 255/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 255/255, green: 87/255, blue: 35/255, alpha: 1)
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+    }
+
+    func backgroundImage() {
+        UIGraphicsBeginImageContext(self.view.frame.size)
+        UIImage(named: "tlo@1x.png")?.drawAsPattern(in: self.view.bounds)
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        self.view.backgroundColor = UIColor(patternImage: image)
     }
     
  

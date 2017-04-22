@@ -11,6 +11,8 @@ import UIKit
 class TableViewController: UITableViewController, AddViewControllerDelegate {
   
     
+    @IBOutlet weak var visualEffect: UIVisualEffectView!
+
     @IBOutlet weak var menuButton: UIBarButtonItem!
     var toDoItems: [ToDoItem]
     
@@ -27,13 +29,14 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         super.init(coder: aDecoder)
         loadToDoItems()
         registerDefaults()
+    
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         leftSideMenu()
         customizeNavigationBar()
-
+        backgroundImage()
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,9 +58,15 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItem", for: indexPath)
         let item = toDoItems[indexPath.row]
-    
+        let bgColorSelectedView = UIView()
+        
         configureText(for: cell, with: item)
         configureCheckmark(for: cell, with: item)
+        
+        cell.backgroundColor = UIColor.clear
+        bgColorSelectedView.backgroundColor = UIColor.brown
+        cell.selectedBackgroundView = bgColorSelectedView
+        
         return cell
     }
     
@@ -188,9 +197,10 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         if revealViewController() != nil {
             menuButton.target = revealViewController()
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
-            revealViewController().rearViewRevealWidth = 175
+            revealViewController().rearViewRevealWidth = 160
             
             view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
         }
     }
     
@@ -200,5 +210,13 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
     }
     
+    // Tło
+    
+    func backgroundImage() {
+        tableView.backgroundView = UIImageView(image: UIImage(named: "tlo@1x.png"))
+    }
+    
+  
+      
     
 }

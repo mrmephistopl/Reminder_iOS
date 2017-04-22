@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6182861E1EAB85610050F763 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6182861D1EAB85610050F763 /* Assets.xcassets */; };
+		618286201EABA43E0050F763 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6182861F1EABA43E0050F763 /* MenuTableViewController.swift */; };
 		61ADD21D1EAAAC8B0061D460 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61ADD21C1EAAAC8B0061D460 /* SWRevealViewController.m */; };
 		61ADD2211EAABB8A0061D460 /* ContactSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ADD2201EAABB8A0061D460 /* ContactSideMenu.swift */; };
 		61ADD2231EAABC840061D460 /* AuthorSideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61ADD2221EAABC840061D460 /* AuthorSideMenu.swift */; };
 		61E81A9F1E9FFEA100FE6FF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81A9E1E9FFEA100FE6FF1 /* AppDelegate.swift */; };
 		61E81AA71E9FFEA100FE6FF1 /* Reminder.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 61E81AA51E9FFEA100FE6FF1 /* Reminder.xcdatamodeld */; };
-		61E81AA91E9FFEA100FE6FF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61E81AA81E9FFEA100FE6FF1 /* Assets.xcassets */; };
 		61E81AAC1E9FFEA100FE6FF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61E81AAA1E9FFEA100FE6FF1 /* LaunchScreen.storyboard */; };
 		61E81AB71E9FFEA100FE6FF1 /* ReminderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81AB61E9FFEA100FE6FF1 /* ReminderTests.swift */; };
 		61E81AC21E9FFEA100FE6FF1 /* ReminderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61E81AC11E9FFEA100FE6FF1 /* ReminderUITests.swift */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6182861D1EAB85610050F763 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6182861F1EABA43E0050F763 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		61ADD21B1EAAAC8B0061D460 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		61ADD21C1EAAAC8B0061D460 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		61ADD21F1EAAAD8A0061D460 /* Reminder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Reminder-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -48,7 +51,6 @@
 		61E81A9B1E9FFEA100FE6FF1 /* Reminder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reminder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61E81A9E1E9FFEA100FE6FF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		61E81AA61E9FFEA100FE6FF1 /* Reminder.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Reminder.xcdatamodel; sourceTree = "<group>"; };
-		61E81AA81E9FFEA100FE6FF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		61E81AAB1E9FFEA100FE6FF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61E81AAD1E9FFEA100FE6FF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61E81AB21E9FFEA100FE6FF1 /* ReminderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReminderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,11 +117,12 @@
 				61E81AD11EA0CB9600FE6FF1 /* AddViewController.swift */,
 				61E81ACF1EA0CB6B00FE6FF1 /* TableViewController.swift */,
 				61E81AD51EA0DBF700FE6FF1 /* ToDoItem.swift */,
-				61E81AA81E9FFEA100FE6FF1 /* Assets.xcassets */,
 				61ADD21B1EAAAC8B0061D460 /* SWRevealViewController.h */,
 				61ADD21C1EAAAC8B0061D460 /* SWRevealViewController.m */,
 				61ADD21F1EAAAD8A0061D460 /* Reminder-Bridging-Header.h */,
 				61E81AD71EA0E4A500FE6FF1 /* Main.storyboard */,
+				6182861D1EAB85610050F763 /* Assets.xcassets */,
+				6182861F1EABA43E0050F763 /* MenuTableViewController.swift */,
 				61ADD2221EAABC840061D460 /* AuthorSideMenu.swift */,
 				61ADD2201EAABB8A0061D460 /* ContactSideMenu.swift */,
 				61E81AAA1E9FFEA100FE6FF1 /* LaunchScreen.storyboard */,
@@ -259,8 +262,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				61E81AD91EA0E4A500FE6FF1 /* Main.storyboard in Resources */,
+				6182861E1EAB85610050F763 /* Assets.xcassets in Resources */,
 				61E81AAC1E9FFEA100FE6FF1 /* LaunchScreen.storyboard in Resources */,
-				61E81AA91E9FFEA100FE6FF1 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +293,7 @@
 				61E81AD01EA0CB6B00FE6FF1 /* TableViewController.swift in Sources */,
 				61E81AD61EA0DBF700FE6FF1 /* ToDoItem.swift in Sources */,
 				61ADD2231EAABC840061D460 /* AuthorSideMenu.swift in Sources */,
+				618286201EABA43E0050F763 /* MenuTableViewController.swift in Sources */,
 				61E81AD21EA0CB9600FE6FF1 /* AddViewController.swift in Sources */,
 				61E81AA71E9FFEA100FE6FF1 /* Reminder.xcdatamodeld in Sources */,
 				61ADD21D1EAAAC8B0061D460 /* SWRevealViewController.m in Sources */,
