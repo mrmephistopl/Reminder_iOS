@@ -18,7 +18,7 @@ class AuthorSideMenu: UIViewController {
     
     func backgroundImage() {
         UIGraphicsBeginImageContext(self.view.frame.size)
-        UIImage(named: "tlo@1x.png")?.drawAsPattern(in: self.view.bounds)
+        UIImage(named: "tlo.png")?.drawAsPattern(in: self.view.bounds)
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         self.view.backgroundColor = UIColor(patternImage: image)

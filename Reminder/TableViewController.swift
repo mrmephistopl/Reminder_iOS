@@ -118,7 +118,7 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
         let indexPaths = [indexPath]
         tableView.insertRows(at: indexPaths, with: .automatic)
         
-        dismiss(animated: true, completion: nil)
+      //  dismiss(animated: true, completion: nil)
         saveToDoItems()
     }
     
@@ -129,7 +129,7 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
                 configureText(for: cell, with: item)
             }
         }
-        dismiss(animated: true, completion: nil)
+     //   dismiss(animated: true, completion: nil)
         saveToDoItems()
     }
     
@@ -213,7 +213,7 @@ class TableViewController: UITableViewController, AddViewControllerDelegate {
     // Tło
     
     func backgroundImage() {
-        tableView.backgroundView = UIImageView(image: UIImage(named: "tlo@1x.png"))
+        tableView.backgroundView = UIImageView(image: UIImage(named: "tlo.png"))
     }
     
   

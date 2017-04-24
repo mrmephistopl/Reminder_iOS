@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Dispatch
 import UserNotifications
 
 protocol AddViewControllerDelegate: class {
@@ -23,12 +24,13 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var shouldRemindSwitch: UISwitch!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var pickerView: UIView!
     
     
     var itemToEdit: ToDoItem?
     weak var delegate: AddViewControllerDelegate?
     var date = Date()
-  
+    let delay = 0.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +51,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
        // doneBarButton.isEnabled = false
         titleTextField.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         // Do any additional setup after loading the view.
+        
+        pickerView.layer.cornerRadius = 5
     }
 
     override func didReceiveMemoryWarning() {
@@ -57,6 +61,8 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func done() {
+        let hudView = HudView.hud(inView: navigationController!.view, animated: true)
+        
         if let toDoItem = itemToEdit {
             toDoItem.title = titleTextField.text!
             if let description = descriptionTextField.text {
@@ -66,6 +72,9 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             toDoItem.shouldRemind = shouldRemindSwitch.isOn
             toDoItem.date = date
             toDoItem.scheduleNotification()
+            
+            hudView.text = "Uptaded"
+            
             
             delegate?.addViewController(self, didFinishEditing: toDoItem)
         } else {
@@ -81,8 +90,13 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         toDoItem.date = date
         toDoItem.scheduleNotification()
             
+        hudView.text = "Added"
+            
         delegate?.addViewController(self, didFinishAdding: toDoItem)
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute:
+            { self.dismiss(animated: true, completion: nil) })
     }
     
     @IBAction func cancel() {
@@ -91,7 +105,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        titleTextField.becomeFirstResponder()
+        //titleTextField.becomeFirstResponder()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -143,6 +157,23 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
+    @IBAction func showUpPickerView(_ sender: Any) {
+        self.view.addSubview(pickerView)
+        pickerView.center = self.view.center
+        
+        pickerView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        pickerView.alpha = 1
+    }
+    
+    @IBAction func dismissPickerView(_ sender: Any) {
+        self.pickerView.removeFromSuperview()
+    }
+    
+    
+    
+
+    
     func customizeNavigationBar() {
         navigationController?.navigationBar.tintColor = UIColor(colorLiteralRed: 255/255, green: 255/255, blue: 255/255, alpha: 1)
         navigationController?.navigationBar.barTintColor = UIColor(colorLiteralRed: 255/255, green: 87/255, blue: 35/255, alpha: 1)
@@ -151,10 +182,15 @@ class AddViewController: UIViewController, UITextFieldDelegate {
 
     func backgroundImage() {
         UIGraphicsBeginImageContext(self.view.frame.size)
-        UIImage(named: "tlo@1x.png")?.drawAsPattern(in: self.view.bounds)
+        UIImage(named: "tlo.png")?.drawAsPattern(in: self.view.bounds)
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         self.view.backgroundColor = UIColor(patternImage: image)
+    }
+    
+    func delayedAction() {
+        let hudView = HudView.hud(inView: navigationController!.view, animated: true)
+        hudView.text = "Updated"
     }
     
  

@@ -48,7 +48,7 @@ class MenuTableViewController: UITableViewController {
         authorCell.selectedBackgroundView = bgAuthorView
         
         tableView.separatorStyle = .none
-        tableView.backgroundView = UIImageView(image: UIImage(named: "TloMenu@1x.png"))
+        tableView.backgroundView = UIImageView(image: UIImage(named: "TloMenu.png"))
     }
 
 }
