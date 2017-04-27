@@ -9,6 +9,8 @@
 import UIKit
 import Dispatch
 import UserNotifications
+import MapKit
+import CoreLocation
 
 protocol AddViewControllerDelegate: class {
     func addViewControllerDidCancel(_ controller: AddViewController)
@@ -16,7 +18,8 @@ protocol AddViewControllerDelegate: class {
     func addViewController(_ controller: AddViewController, didFinishEditing item: ToDoItem)
 }
 
-class AddViewController: UIViewController, UITextFieldDelegate {
+
+class AddViewController: UIViewController, UITextFieldDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
@@ -25,17 +28,33 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var pickerView: UIView!
-    
-    
+ 
+    @IBOutlet weak var map: MKMapView!
+
+    let locationManager = CLLocationManager()
+
     var itemToEdit: ToDoItem?
     weak var delegate: AddViewControllerDelegate?
     var date = Date()
     let delay = 0.5
+
+    var locationCoordinate = CLLocationCoordinate2D()
+    //////////////
+    var searchController:UISearchController!
+    var annotation:MKAnnotation!
+    var localSearchRequest:MKLocalSearchRequest!
+    var localSearch:MKLocalSearch!
+    var localSearchResponse:MKLocalSearchResponse!
+    var error:NSError!
+    var pointAnnotation:MKPointAnnotation!
+    var pinAnnotationView:MKPinAnnotationView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        startManagerLocation()
         customizeNavigationBar()
         backgroundImage()
+       // searchTable()
         
         if let item = itemToEdit {
             title = "Edit"
@@ -46,13 +65,17 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             date = item.date
             datePicker.setDate(date, animated: false)
             dateLabel.textColor = UIColor.red
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = CLLocationCoordinate2DMake(item.locValue.latitude, item.locValue.longitude)
+            annotation.title = titleTextField.text
+            map.addAnnotation(annotation)
         }
         updateDateLabel()
        // doneBarButton.isEnabled = false
         titleTextField.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
-        // Do any additional setup after loading the view.
-        
         pickerView.layer.cornerRadius = 5
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,9 +95,9 @@ class AddViewController: UIViewController, UITextFieldDelegate {
             toDoItem.shouldRemind = shouldRemindSwitch.isOn
             toDoItem.date = date
             toDoItem.scheduleNotification()
-            
+            toDoItem.locValue = locationCoordinate
             hudView.text = "Uptaded"
-            
+            toDoItem.locValue = locationCoordinate
             
             delegate?.addViewController(self, didFinishEditing: toDoItem)
         } else {
@@ -89,7 +112,7 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         toDoItem.shouldRemind = shouldRemindSwitch.isOn
         toDoItem.date = date
         toDoItem.scheduleNotification()
-            
+        toDoItem.locValue = locationCoordinate
         hudView.text = "Added"
             
         delegate?.addViewController(self, didFinishAdding: toDoItem)
@@ -111,11 +134,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    /* func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        titleTextField.resignFirstResponder()
-        return true
-    }*/
     
     func editingChanged(_ textField: UITextField) {
         if textField.text?.characters.count == 1 {
@@ -170,8 +188,6 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         self.pickerView.removeFromSuperview()
     }
     
-    
-    
 
     
     func customizeNavigationBar() {
@@ -193,20 +209,76 @@ class AddViewController: UIViewController, UITextFieldDelegate {
         hudView.text = "Updated"
     }
     
- 
     
-    /*
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-       
-        let oldText = textField.text! as NSString
-        let newText = oldText.replacingCharacters(in: range, with: string) as NSString
-        
-        doneBarButton.isEnabled = (newText.length > 0)
-        return true
-    } */
+    ///////////////////////////////////MAPY////////////////////////
 
-
+    func startManagerLocation() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+    }
     
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            let span = MKCoordinateSpanMake(0.05, 0.05)
+            let region = MKCoordinateRegion(center: location.coordinate, span: span)
+            map.setRegion(region, animated: true)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error: \(error)")
+    }
+    
+    @IBAction func showBarButton(_ sender: Any) {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.delegate = self
+        present(searchController, animated: true, completion: nil)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        searchBar.resignFirstResponder()
+        dismiss(animated: true, completion: nil)
+        if self.map.annotations.count != 0{
+            annotation = self.map.annotations[0]
+            self.map.removeAnnotation(annotation)
+        }
+        
+        localSearchRequest = MKLocalSearchRequest()
+        localSearchRequest.naturalLanguageQuery = searchBar.text
+        localSearch = MKLocalSearch(request: localSearchRequest)
+        localSearch.start { (localSearchResponse, error) -> Void in
+            
+            if localSearchResponse == nil{
+                let alertController = UIAlertController(title: nil, message: "Place Not Found", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+    
+            self.pointAnnotation = MKPointAnnotation()
+            self.pointAnnotation.title = searchBar.text
+            self.pointAnnotation.coordinate = CLLocationCoordinate2D(latitude: localSearchResponse!.boundingRegion.center.latitude, longitude:     localSearchResponse!.boundingRegion.center.longitude)
+            
+            
+            self.pinAnnotationView = MKPinAnnotationView(annotation: self.pointAnnotation, reuseIdentifier: nil)
+            self.map.centerCoordinate = self.pointAnnotation.coordinate
+            self.map.addAnnotation(self.pinAnnotationView.annotation!)
+            self.locationCoordinate = CLLocationCoordinate2DMake(localSearchResponse!.boundingRegion.center.latitude, localSearchResponse!.boundingRegion.center.longitude)
+        }
+    }
+  
+    
+
 }
+
+

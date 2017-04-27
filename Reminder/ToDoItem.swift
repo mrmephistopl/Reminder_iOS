@@ -6,17 +6,18 @@
 //  Copyright © 2017 Mateusz Potasnik. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import UserNotifications
+import CoreLocation
 
-class ToDoItem: NSObject, NSCoding {
+class ToDoItem: NSObject, NSCoding, CLLocationManagerDelegate {
     var title = ""
     var desc = ""
     var checked = false
     var date = Date()
     var shouldRemind = false
     var toDoItemID: Int
-    
+    var locValue: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
    
     func toogleChecked() {
         checked = !checked
