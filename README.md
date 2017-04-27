@@ -4,6 +4,7 @@ Aplikacja pozwala na dodanie rzeczy, które mamy zrobić. Po wpisaniu nazwy moż
 
 Jest to moja pierwsza aplikacja. Wykorzystałem w niej SWRevealViewController do stworzenia menu wysuwanego z lewej strony oraz efekty do TexFields z:
   https://github.com/raulriera/TextFieldEffects
+Grafiki były robione w Photoshopie CC 2017
 
 W najbliższym czasie planuje dodać baze danych w coredata oraz zakładki z wykonanymi i zaległymi rzeczami.
  
