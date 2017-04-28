@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		611F59F31EB36F4D007FE0CC /* LocationSearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 611F59F21EB36F4D007FE0CC /* LocationSearchTable.swift */; };
 		615FB1DD1EAE9F0F00EB8374 /* AkiraTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615FB1D11EAE9F0E00EB8374 /* AkiraTextField.swift */; };
 		615FB1DF1EAE9F0F00EB8374 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 615FB1D31EAE9F0E00EB8374 /* Info.plist */; };
 		615FB1E51EAE9F0F00EB8374 /* TextFieldEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615FB1DA1EAE9F0E00EB8374 /* TextFieldEffects.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		611F59F21EB36F4D007FE0CC /* LocationSearchTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationSearchTable.swift; sourceTree = "<group>"; };
 		615FB1D11EAE9F0E00EB8374 /* AkiraTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AkiraTextField.swift; sourceTree = "<group>"; };
 		615FB1D31EAE9F0E00EB8374 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		615FB1D91EAE9F0E00EB8374 /* TextFieldEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextFieldEffects.h; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				61ADD21F1EAAAD8A0061D460 /* Reminder-Bridging-Header.h */,
 				6182861D1EAB85610050F763 /* Assets.xcassets */,
 				61CDCEDF1EB289EF00255435 /* Main.storyboard */,
+				611F59F21EB36F4D007FE0CC /* LocationSearchTable.swift */,
 				61AB80331EACD87B00A44FFE /* HudView.swift */,
 				6182861F1EABA43E0050F763 /* MenuTableViewController.swift */,
 				61ADD2221EAABC840061D460 /* AuthorSideMenu.swift */,
@@ -311,6 +314,7 @@
 				61ADD2211EAABB8A0061D460 /* ContactSideMenu.swift in Sources */,
 				61E81A9F1E9FFEA100FE6FF1 /* AppDelegate.swift in Sources */,
 				61E81AD01EA0CB6B00FE6FF1 /* TableViewController.swift in Sources */,
+				611F59F31EB36F4D007FE0CC /* LocationSearchTable.swift in Sources */,
 				61E81AD61EA0DBF700FE6FF1 /* ToDoItem.swift in Sources */,
 				61ADD2231EAABC840061D460 /* AuthorSideMenu.swift in Sources */,
 				615FB1E51EAE9F0F00EB8374 /* TextFieldEffects.swift in Sources */,

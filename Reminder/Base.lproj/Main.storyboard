@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -177,7 +176,7 @@
                                 <rect key="frame" x="0.0" y="343" width="320" height="225"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <connections>
-                                    <outlet property="delegate" destination="88m-PR-dUg" id="wmt-Ux-Muj"/>
+                                    <outlet property="delegate" destination="88m-PR-dUg" id="7cY-gY-5yI"/>
                                 </connections>
                             </mapView>
                         </subviews>
@@ -190,18 +189,11 @@
                                 <action selector="cancel" destination="88m-PR-dUg" id="HqE-pa-wkm"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem enabled="NO" systemItem="done" id="0ED-Fi-Vhf">
-                                <connections>
-                                    <action selector="done" destination="88m-PR-dUg" id="r5J-4b-Dl8"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="search" id="npg-nI-YpF">
-                                <connections>
-                                    <action selector="showBarButton:" destination="88m-PR-dUg" id="41a-E0-bg4"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="0ED-Fi-Vhf">
+                            <connections>
+                                <action selector="done" destination="88m-PR-dUg" id="r5J-4b-Dl8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -249,6 +241,50 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="3011.25" y="134.1549295774648"/>
+        </scene>
+        <!--Location Search Table-->
+        <scene sceneID="Hl9-Qw-5qT">
+            <objects>
+                <tableViewController storyboardIdentifier="LocationSearchTable" id="qLH-4P-IDr" customClass="LocationSearchTable" customModule="Reminder" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="MPG-xH-czy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="L7f-Rt-Myk" detailTextLabel="ydX-O1-PEk" style="IBUITableViewCellStyleSubtitle" id="NnK-39-Lv3">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NnK-39-Lv3" id="Hbc-BC-ovT">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L7f-Rt-Myk">
+                                            <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ydX-O1-PEk">
+                                            <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="qLH-4P-IDr" id="pF9-en-Gcw"/>
+                            <outlet property="delegate" destination="qLH-4P-IDr" id="Sgj-NI-lIO"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O68-X6-GlI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3832" y="140"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="hnK-ND-rAV">

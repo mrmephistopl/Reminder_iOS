@@ -60,7 +60,6 @@ class ToDoItem: NSObject, NSCoding, CLLocationManagerDelegate {
             let center = UNUserNotificationCenter.current()
             center.add(request)
             
-           // print("Schedule notification \(request) for itemID \(toDoItemID)")
         }
     }
     
